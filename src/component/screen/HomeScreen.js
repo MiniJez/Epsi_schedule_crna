@@ -40,14 +40,16 @@ class HomeScreen extends React.Component {
                     :
                     <Fragment>
                         <Header navigation={this.props.navigation} date={this.props.state.date}></Header>
-                        { this.state.schedule.length > 0 ?
+                        { this.state.schedule.filter(item => item.date.toLowerCase() === getLongDate(new Date(this.props.state.date))).length > 0 ?
                         <FlatList
                             data={this.state.schedule.filter(item => item.date.toLowerCase() === getLongDate(new Date(this.props.state.date)))}
                             renderItem={({ item }) =>   <ScheduleItem item={item}></ScheduleItem>}
                             keyExtractor={item => item.id}
                         />
                         : 
-                        <Text>Aucun cours prévues</Text>
+                        <View style={styles.noLessonContainer}>
+                            <Text style={styles.noLessonText}>Aucun cours prévues 🎉😁👍👌</Text>
+                        </View>
                         }
                     </Fragment>
                 }
@@ -68,6 +70,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    noLessonContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    noLessonText: {
+        fontSize: 25
     }
 })
 
