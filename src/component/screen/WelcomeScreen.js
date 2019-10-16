@@ -1,24 +1,56 @@
-import React from 'react'
-import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text, Alert } from 'react-native'
+import React, { Fragment } from 'react'
+import { View, StyleSheet, Image, TextInput, TouchableOpacity, Text, Alert, AsyncStorage, ActivityIndicator } from 'react-native'
 import imgUrl from '../../constants/img'
+import { connect } from 'react-redux'
+import { saveUser } from '../../redux/action'
 
 class WelcomeScreen extends React.Component {
+    _isMounted = false;
 
     constructor(props) {
         super(props)
         this.state = {
-
+            name: '',
+            lastName: '',
+            loading: true
         }
-
-        this.name = ''
-        this.lastName = ''
     }
 
-    _goToHome() {
-        console.log(this.name, this.lastName)
-        this.props.navigation.navigate('Home')
-        /*
-        if(this.name.length > 0 && this.lastName.length > 0){
+    async componentDidMount() {
+        this._isMounted = true;
+
+        try{
+            let user = null
+            user = await AsyncStorage.getItem('user')
+            user = JSON.parse(user)
+            if (user !== null) {
+                this.props.dispatch(saveUser({name: user.name, lastName: user.lastName}))
+                this.props.navigation.navigate('Home')
+            }
+        } catch(error) {
+            Alert.alert(
+                error,
+                '',
+                [
+                    {
+                        text: 'OK'
+                    }
+                ]
+            )
+        }
+
+        if(this._isMounted) {
+            this.setState({loading: false})
+        }
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    async _goToHome() {
+        if(this.state.name.length > 0 && this.state.lastName.length > 0) {
+            await AsyncStorage.setItem('user', JSON.stringify({name: this.state.name, lastName: this.state.lastName}))
             this.props.navigation.navigate('Home')
         }
         else {
@@ -32,35 +64,43 @@ class WelcomeScreen extends React.Component {
                 ]
             )
         }
-        */
     }
 
     render() {
         return(
             <View style={styles.mainContainer}>
-                <Image
-                    style={styles.logoImg}
-                    source={imgUrl.logo}
-                    resizeMode="center"
-                />
-                <View style={styles.textInputContainer}>
-                    <TextInput 
-                        style={styles.textInput}
-                        placeholder="Prénom"
-                        onChangeText={(name) => {this.name = name}}
-                    />
-                    <TextInput 
-                        style={styles.textInput}
-                        placeholder="Nom"
-                        onChangeText={(lastName) => {this.lastName = lastName}}
-                    />
-                    <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => this._goToHome()}
-                    >
-                        <Text style={styles.buttonText}>Continuer</Text>
-                    </TouchableOpacity>
-                </View>
+                {
+                    this.state.loading ? 
+                    <View style={styles.activityIndicator}>
+                        <ActivityIndicator size="large"/>
+                    </View> 
+                    :
+                    <Fragment>
+                        <Image
+                            style={styles.logoImg}
+                            source={imgUrl.logo}
+                            resizeMode="center"
+                        />
+                        <View style={styles.textInputContainer}>
+                            <TextInput 
+                                style={styles.textInput}
+                                placeholder="Prénom"
+                                onChangeText={(name) => this.setState({name: name.toLowerCase()})}
+                            />
+                            <TextInput 
+                                style={styles.textInput}
+                                placeholder="Nom"
+                                onChangeText={(lastName) => this.setState({lastName: lastName.toLowerCase()})}
+                            />
+                            <TouchableOpacity 
+                                style={styles.button}
+                                onPress={() => this._goToHome()}
+                            >
+                                <Text style={styles.buttonText}>Continuer</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Fragment>
+                }
             </View>
         )
     }
@@ -69,6 +109,11 @@ class WelcomeScreen extends React.Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
+        alignItems: 'center'
+    },
+    activityIndicator: {
+        flex: 1,
+        justifyContent: 'center',
         alignItems: 'center'
     },
     logoImg: {
@@ -101,4 +146,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default WelcomeScreen
+export default connect()(WelcomeScreen)

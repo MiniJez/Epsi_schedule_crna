@@ -31,7 +31,7 @@ class Header extends React.Component {
                         <Icon name="keyboard-arrow-left" size={30} containerStyle={styles.icon}/>
                     </TouchableOpacity>
                     <View style={styles.dayContainer}>
-                        <Text style={styles.day}>{getLongDate(new Date(this.props.state.date))}</Text>
+                        <Text style={styles.day}>{getLongDate(new Date(this.props.date))}</Text>
                     </View>
                     <TouchableOpacity
                     onPress={this.handleNextDay}

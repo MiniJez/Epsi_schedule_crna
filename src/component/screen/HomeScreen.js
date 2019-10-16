@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react'
 import { View, ActivityIndicator, StyleSheet, FlatList, Text } from 'react-native'
-import { getEpsiScheduleDay } from '../../Api/epsiScheduleApi'
+import { getEpsiScheduleDay, getEpsiScheduleWeek } from '../../Api/epsiScheduleApi'
 import ScheduleItem from '../layout/ScheduleItem'
 import Header from '../layout/Header'
 import { connect } from 'react-redux'
+import { getWeekNumber, getLongDate } from '../../utils/utils'
 
 class HomeScreen extends React.Component {
     constructor(props) {
@@ -16,14 +17,14 @@ class HomeScreen extends React.Component {
 
     async componentDidMount() {
         let date = this.props.state.date
-        let res = await getEpsiScheduleDay(date)
+        let res = await getEpsiScheduleWeek(date)
         this.setState({schedule: res, isLoading: false})
     }
 
     async componentDidUpdate(prevProps) {
-        if(this.props.state.date !== prevProps.state.date) {
+        if(this.props.state.date !== prevProps.state.date && getWeekNumber(new Date(this.props.state.date)) !==  getWeekNumber(new Date(prevProps.state.date))){
             this.setState({isLoading: true})
-            let res = await getEpsiScheduleDay(this.props.state.date)
+            let res = await getEpsiScheduleWeek(this.props.state.date)
             this.setState({schedule: res, isLoading: false})
         }
     }
@@ -38,15 +39,17 @@ class HomeScreen extends React.Component {
                     </View> 
                     :
                     <Fragment>
-                        <Header navigation={this.props.navigation}></Header>
-                        { this.state.schedule.length > 0 ?
+                        <Header navigation={this.props.navigation} date={this.props.state.date}></Header>
+                        { this.state.schedule.filter(item => item.date.toLowerCase() === getLongDate(new Date(this.props.state.date))).length > 0 ?
                         <FlatList
-                            data={this.state.schedule}
+                            data={this.state.schedule.filter(item => item.date.toLowerCase() === getLongDate(new Date(this.props.state.date)))}
                             renderItem={({ item }) =>   <ScheduleItem item={item}></ScheduleItem>}
                             keyExtractor={item => item.id}
                         />
                         : 
-                        <Text>Aucun cours prévues</Text>
+                        <View style={styles.noLessonContainer}>
+                            <Text style={styles.noLessonText}>Aucun cours prévues 🎉😁👍👌</Text>
+                        </View>
                         }
                     </Fragment>
                 }
@@ -67,6 +70,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    noLessonContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    noLessonText: {
+        fontSize: 25
     }
 })
 
