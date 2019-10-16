@@ -18,7 +18,7 @@ class WelcomeScreen extends React.Component {
 
     async componentDidMount() {
         this._isMounted = true;
-
+        
         try{
             let user = null
             user = await AsyncStorage.getItem('user')

@@ -15,6 +15,15 @@ const HomeStack = createStackNavigator({
   },
 });
 
+const WelcomeStack = createStackNavigator({
+  Welcome: {
+      screen: WelcomeScreen,
+      navigationOptions: () => ({
+        header: null
+      }),
+  },
+});
+
 const MainStack = createDrawerNavigator({
   HomeStack,
   },
@@ -24,7 +33,7 @@ const MainStack = createDrawerNavigator({
   }
 );
 
-const SwitchNavigator = createSwitchNavigator({WelcomeScreen, MainStack})
+const SwitchNavigator = createSwitchNavigator({WelcomeStack, MainStack})
 
 const AppNavigator = createAppContainer(SwitchNavigator);
 

@@ -5,7 +5,7 @@ import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { addOneDayToDate, removeOneDayToDate } from '../../redux/action'
 import { connect } from 'react-redux'
-import { getLongDate } from '../../utils/utils'
+import { getLongDate, getWeekNumber } from '../../utils/utils'
 
 class Header extends React.Component {
     constructor(props){
@@ -21,24 +21,50 @@ class Header extends React.Component {
     }
 
     render() {
+
+        const {
+            type,
+            date,
+            navigation
+        } = this.props
+
         return(
             <View style={styles.mainContainer}>
-                <MenuBurger navigation={this.props.navigation} style={styles.menuBurger} containerStyle={styles.menuBurgerContainerStyle} size={40}></MenuBurger>
-                <View style={styles.headerTitle}>
-                    <TouchableOpacity
-                    onPress={this.handlePrevDay}
-                    >
-                        <Icon name="keyboard-arrow-left" size={30} containerStyle={styles.icon}/>
-                    </TouchableOpacity>
-                    <View style={styles.dayContainer}>
-                        <Text style={styles.day}>{getLongDate(new Date(this.props.date))}</Text>
-                    </View>
-                    <TouchableOpacity
-                    onPress={this.handleNextDay}
-                    >
-                      <Icon name="keyboard-arrow-right" size={30} containerStyle={styles.icon}/>
-                    </TouchableOpacity>
-                </View>
+                <MenuBurger navigation={navigation} style={styles.menuBurger} containerStyle={styles.menuBurgerContainerStyle} size={40}></MenuBurger>
+                {
+                    type === 'jour' ?
+                        <View style={styles.headerTitle}>
+                            <TouchableOpacity
+                            onPress={this.handlePrevDay}
+                            >
+                                <Icon name="keyboard-arrow-left" size={30} containerStyle={styles.icon}/>
+                            </TouchableOpacity>
+                            <View style={styles.dayContainer}>
+                                <Text style={styles.day}>{getLongDate(new Date(date))}</Text>
+                            </View>
+                            <TouchableOpacity
+                            onPress={this.handleNextDay}
+                            >
+                            <Icon name="keyboard-arrow-right" size={30} containerStyle={styles.icon}/>
+                            </TouchableOpacity>
+                        </View>
+                    :
+                        <View style={styles.headerTitle}>
+                            <TouchableOpacity
+                            onPress={this.handlePrevDay}
+                            >
+                                <Icon name="keyboard-arrow-left" size={30} containerStyle={styles.icon}/>
+                            </TouchableOpacity>
+                            <View style={styles.dayContainer}>
+                                <Text style={styles.day}>Semaine {getWeekNumber(new Date(date))}</Text>
+                            </View>
+                            <TouchableOpacity
+                            onPress={this.handleNextDay}
+                            >
+                            <Icon name="keyboard-arrow-right" size={30} containerStyle={styles.icon}/>
+                            </TouchableOpacity>
+                        </View>
+                }
             </View>
         )
     }
