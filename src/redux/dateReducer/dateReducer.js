@@ -1,4 +1,4 @@
-import { getFormatedDate } from '../utils/utils'
+import { getFormatedDate } from '../../utils/utils'
 
 const initialState = { state: { date: getFormatedDate(new Date()) } }
 
@@ -21,6 +21,7 @@ function toggleDate(state = initialState, action) {
             }
 
             return nextState
+            
         case 'REMOVE_ONE_DAY_TO_DATE':
             date = action.value
             date = new Date(date)
