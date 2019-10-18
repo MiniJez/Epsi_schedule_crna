@@ -10,9 +10,7 @@ class ScheduleItemWeek extends React.Component {
         } = this.props
 
         return(
-            <Card title={`${item.debut} - ${item.fin}`} containerStyle={styles.card}>
-
-            </Card>
+            <View></View>
         )
     }
 }

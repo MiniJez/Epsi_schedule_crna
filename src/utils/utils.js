@@ -21,4 +21,49 @@ export function getWeekNumber(date) {
     d.setUTCDate(d.getUTCDate() + 4 - dayNum);
     var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
     return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
-  };
+};
+
+export function getDateOfISOWeek(w, y) {
+    var simple = new Date(y, 0, 1 + (w - 1) * 7);
+    var dow = simple.getDay();
+    var ISOweekStart = simple;
+    if (dow <= 4)
+        ISOweekStart.setDate(simple.getDate() - simple.getDay() + 1);
+    else
+        ISOweekStart.setDate(simple.getDate() + 8 - simple.getDay());
+    
+    return ISOweekStart;
+}
+
+export function getAllWeekDays(date) {
+    let firstDay = getDateOfISOWeek(getWeekNumber(new Date(date)), new Date(date).getFullYear())
+    allDays = [
+        {
+            day: 'Lundi',
+            date: firstDay.getDate(),
+            month: firstDay.getMonth() + 1
+        },
+        {
+            day: 'Mardi',
+            date: firstDay.getDate(firstDay.setDate(firstDay.getDate() + 1)),
+            month: firstDay.getMonth() + 1
+        },
+        {
+            day: 'Mercredi',
+            date: firstDay.getDate(firstDay.setDate(firstDay.getDate() + 1)),
+            month: firstDay.getMonth() + 1
+        },
+        {
+            day: 'Jeudi',
+            date: firstDay.getDate(firstDay.setDate(firstDay.getDate() + 1)),
+            month: firstDay.getMonth() + 1
+        },
+        {
+            day: 'Vendredi',
+            date: firstDay.getDate(firstDay.setDate(firstDay.getDate() + 1)),
+            month: firstDay.getMonth() + 1
+        }
+    ]
+
+    return allDays
+}

@@ -16,8 +16,18 @@ class Header extends React.Component {
         this.props.dispatch(addOneDayToDate(this.props.state.date))
     }
 
+    handleNextWeek = () => {
+        date = new Date(this.props.state.date).setDate(new Date(this.props.state.date).getDate()+6)
+        this.props.dispatch(addOneDayToDate(date))
+    }
+
     handlePrevDay = () => {
         this.props.dispatch(removeOneDayToDate(this.props.state.date))
+    }
+
+    handlePrevWeek = () => {
+        date = new Date(this.props.state.date).setDate(new Date(this.props.state.date).getDate()-6)
+        this.props.dispatch(removeOneDayToDate(date))
     }
 
     render() {
@@ -51,7 +61,7 @@ class Header extends React.Component {
                     :
                         <View style={styles.headerTitle}>
                             <TouchableOpacity
-                            onPress={this.handlePrevDay}
+                            onPress={this.handlePrevWeek}
                             >
                                 <Icon name="keyboard-arrow-left" size={30} containerStyle={styles.icon}/>
                             </TouchableOpacity>
@@ -59,7 +69,7 @@ class Header extends React.Component {
                                 <Text style={styles.day}>Semaine {getWeekNumber(new Date(date))}</Text>
                             </View>
                             <TouchableOpacity
-                            onPress={this.handleNextDay}
+                            onPress={this.handleNextWeek}
                             >
                             <Icon name="keyboard-arrow-right" size={30} containerStyle={styles.icon}/>
                             </TouchableOpacity>
