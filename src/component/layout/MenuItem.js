@@ -33,23 +33,28 @@ class MenuItem extends React.Component {
         } = this.props
 
         return(
-            <TouchableOpacity
-            style={styles.container}
-            onPress={() => this.handleItemNav(title)}
-            >
-                <Icon name={name} type={type} size={30} containerStyle={styles.icon}/>
-                <Text style={styles.text}>{title}</Text>
-            </TouchableOpacity>
+            <View style={styles.container}>
+                <TouchableOpacity
+                style={styles.touchContainer}
+                onPress={() => this.handleItemNav(title)}
+                >
+                    <Icon name={name} type={type} size={30} containerStyle={styles.icon}/>
+                    <Text style={styles.text}>{title}</Text>
+                </TouchableOpacity>
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
     container: {
+        height: 50,
+        borderBottomWidth: 0.5,
+        justifyContent: 'center',
+    },
+    touchContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        height: 50,
-        borderBottomWidth: 0.5
     },
     icon: {
         marginLeft: 10,

@@ -1,4 +1,4 @@
 import { createStore } from 'redux';
-import addOneDayToDate from '../redux/dateReducer/dateReducer'
+import reducer from './reducer/index'
 
-export default createStore(addOneDayToDate)
+export default createStore(reducer)

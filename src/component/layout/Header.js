@@ -13,20 +13,20 @@ class Header extends React.Component {
     }
 
     handleNextDay = () => {
-        this.props.dispatch(addOneDayToDate(this.props.state.date))
+        this.props.dispatch(addOneDayToDate(this.props.dateReducer.date))
     }
 
     handleNextWeek = () => {
-        date = new Date(this.props.state.date).setDate(new Date(this.props.state.date).getDate()+6)
+        date = new Date(this.props.dateReducer.date).setDate(new Date(this.props.dateReducer.date).getDate()+6)
         this.props.dispatch(addOneDayToDate(date))
     }
 
     handlePrevDay = () => {
-        this.props.dispatch(removeOneDayToDate(this.props.state.date))
+        this.props.dispatch(removeOneDayToDate(this.props.dateReducer.date))
     }
 
     handlePrevWeek = () => {
-        date = new Date(this.props.state.date).setDate(new Date(this.props.state.date).getDate()-6)
+        date = new Date(this.props.dateReducer.date).setDate(new Date(this.props.dateReducer.date).getDate()-6)
         this.props.dispatch(removeOneDayToDate(date))
     }
 

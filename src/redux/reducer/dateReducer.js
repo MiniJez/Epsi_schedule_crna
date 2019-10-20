@@ -1,8 +1,8 @@
 import { getFormatedDate } from '../../utils/utils'
 
-const initialState = { state: { date: getFormatedDate(new Date()) } }
+const initialState = { date: getFormatedDate(new Date()) }
 
-function toggleDate(state = initialState, action) {
+function dateReducer(state = initialState, action) {
     let nextState
     let date
 
@@ -15,9 +15,7 @@ function toggleDate(state = initialState, action) {
 
             nextState = {
                 ...state,
-                state: {
-                    date: date
-                }
+                date: date
             }
 
             return nextState
@@ -30,9 +28,7 @@ function toggleDate(state = initialState, action) {
 
             nextState = {
                 ...state,
-                state: {
-                    date: date
-                }
+                date: date
             }
 
             return nextState
@@ -42,4 +38,4 @@ function toggleDate(state = initialState, action) {
     }
 }
 
-export default toggleDate
+export default dateReducer

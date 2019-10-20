@@ -18,7 +18,13 @@ class WelcomeScreen extends React.Component {
 
     async componentDidMount() {
         this._isMounted = true;
-        
+        await this.setUser()
+        if(this._isMounted) {
+            this.setState({loading: false})
+        }
+    }
+
+    async setUser() {
         try{
             let user = null
             user = await AsyncStorage.getItem('user')
@@ -38,10 +44,6 @@ class WelcomeScreen extends React.Component {
                 ]
             )
         }
-
-        if(this._isMounted) {
-            this.setState({loading: false})
-        }
     }
 
     componentWillUnmount() {
@@ -50,8 +52,8 @@ class WelcomeScreen extends React.Component {
 
     async _goToHome() {
         if(this.state.name.length > 0 && this.state.lastName.length > 0) {
-            await AsyncStorage.setItem('user', JSON.stringify({name: this.state.name, lastName: this.state.lastName}))
-            this.props.navigation.navigate('Home')
+            await AsyncStorage.setItem('user', JSON.stringify({name: this.state.name.toLowerCase(), lastName: this.state.lastName.toLowerCase()}))
+            this.setUser()
         }
         else {
             Alert.alert(
@@ -76,11 +78,14 @@ class WelcomeScreen extends React.Component {
                     </View> 
                     :
                     <Fragment>
-                        <Image
-                            style={styles.logoImg}
-                            source={imgUrl.logo}
-                            resizeMode="center"
-                        />
+                        <View style={styles.imgcontainer}>
+                            <Image
+                                style={styles.logoImg}
+                                source={imgUrl.logo}
+                                resizeMode="center"
+                            />
+                        </View>
+                        <Text style={styles.advice}>Renseigner votre nom et prénom utilisé par votre adresse email epsi</Text>
                         <View style={styles.textInputContainer}>
                             <TextInput 
                                 style={styles.textInput}
@@ -106,6 +111,10 @@ class WelcomeScreen extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return state
+}
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -116,9 +125,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    imgcontainer: {
+        height: "30%"
+    },
     logoImg: {
         flex: 1,
         width: 200,
+    },
+    advice: {
+        width: '77%',
+        marginBottom: 15 
     },
     textInputContainer: {
         flex: 1,
@@ -126,11 +142,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textInput: {
-        elevation: 2,
         width: '80%',
         marginBottom: 10,
         borderRadius: 15,
-        paddingLeft: 10
+        paddingLeft: 10,
+        borderWidth: 0.5,
+        borderRadius: 100
     },
     button: {
         borderRadius: 10,
@@ -146,4 +163,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect()(WelcomeScreen)
+export default connect(mapStateToProps)(WelcomeScreen)

@@ -11,8 +11,12 @@ export function getFormatedDate(date) {
 }
 
 export function getLongDate(date) {
-    var options = { weekday: 'long', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('fr-FR', options);
+    var days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    var month = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aôut', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
+    var dayName = days[date.getDay()];
+    var monthName = month[date.getMonth()]
+
+    return `${dayName} ${date.getDate()} ${monthName}`
 }
 
 export function getWeekNumber(date) {

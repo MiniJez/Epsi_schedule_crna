@@ -4,6 +4,7 @@ import WelcomeScreen from '../screen/WelcomeScreen'
 import HomeScreen from '../screen/HomeScreen'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import SideMenu from '../navigation/SideMenu'
+import SingleItem from '../screen/SingleItem'
 import { Dimensions } from 'react-native';
 
 const HomeStack = createStackNavigator({
@@ -13,6 +14,7 @@ const HomeStack = createStackNavigator({
         header: null
       }),
   },
+  SingleItem
 });
 
 const WelcomeStack = createStackNavigator({
