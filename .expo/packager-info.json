@@ -1,9 +1,0 @@
-{
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 9000,
-  "expoServerNgrokUrl": "https://ig-k4g.minijez.epsi-schedule-crna.exp.direct",
-  "packagerNgrokUrl": "https://packager.ig-k4g.minijez.epsi-schedule-crna.exp.direct",
-  "ngrokPid": 5772,
-  "devToolsPort": 19002
-}

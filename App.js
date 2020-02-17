@@ -1,16 +1,25 @@
-import React from 'react'
-import AppNavigator from './src/component/navigation/AppNavigator'
-import { Provider } from 'react-redux'
-import Store from './src/redux/store'
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
 
-class App extends React.Component {
-  render() {
-    return(
-      <Provider store={Store}>
-        <AppNavigator />
-      </Provider>
-    )
-  }
-}
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import MainNavigator from './src/navigation/mainNavigator'
+import { Provider } from 'react-redux';
+import store from './src/redux'
+
+const App: () => React$Node = () => {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
+    </Provider>
+  );
+};
 
 export default App;

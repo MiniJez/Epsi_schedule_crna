@@ -1,0 +1,70 @@
+{
+  "_from": "react-native-week-view",
+  "_id": "react-native-week-view@0.0.9",
+  "_inBundle": false,
+  "_integrity": "sha512-fsAndeOqr3CUY9VRmmsfMr+y1TWt2c1w7/1OKUKRHA5wQ2ehHTd06YlWn6DL8LEDuzDGTznlGWQILgtv+BCf8g==",
+  "_location": "/react-native-week-view",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "react-native-week-view",
+    "name": "react-native-week-view",
+    "escapedName": "react-native-week-view",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-week-view/-/react-native-week-view-0.0.9.tgz",
+  "_shasum": "7d48f68b449235a27f38c15ea182273c4e389a13",
+  "_spec": "react-native-week-view",
+  "_where": "C:\\Users\\arder\\Desktop\\Dev\\React native\\Epsi_schedule_crna_v2",
+  "author": {
+    "name": "Hoang Nguyen",
+    "url": "https://github.com/hoangnm"
+  },
+  "bugs": {
+    "url": "https://github.com/hoangnm/react-native-week-view/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "moment": "^2.19.3",
+    "prop-types": "^15.7.2"
+  },
+  "deprecated": false,
+  "description": "Week View Calendar for React Native",
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.13.0"
+  },
+  "homepage": "https://github.com/hoangnm/react-native-week-view#readme",
+  "keywords": [
+    "android",
+    "ios",
+    "react-native",
+    "react",
+    "react-component",
+    "weekview",
+    "calendar"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "react-native-week-view",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoangnm/react-native-week-view.git"
+  },
+  "version": "0.0.9"
+}

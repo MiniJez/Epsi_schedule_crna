@@ -1,37 +1,4 @@
 {
-  "expo": {
-    "android": {
-      "package": "com.minijez.epsi_schedule_crna",
-      "versionCode": 1,
-      "permissions": [],
-      "icon": "./src/assets/img/icon.png"
-    },
-    "name": "Epsi schedule",
-    "slug": "Epsi_schedule_crna",
-    "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./src/assets/img/icon.png",
-    "splash": {
-      "image": "./src/assets/img/splash-screen.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "description": ""
-  }
+  "name": "Epsi_schedule_crna_v2",
+  "displayName": "Epsi_schedule_crna_v2"
 }

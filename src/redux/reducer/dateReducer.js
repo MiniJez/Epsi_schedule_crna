@@ -7,8 +7,8 @@ function dateReducer(state = initialState, action) {
     let date
 
     switch (action.type) {
-        case 'ADD_ONE_DAY_TO_DATE':
-            date = action.value
+        case 'ADD_DAY_TO_DATE':
+            date = action.payload
             date = new Date(date)
             date.setDate(date.getDate() + 1)
             date = getFormatedDate(date)
@@ -20,8 +20,8 @@ function dateReducer(state = initialState, action) {
 
             return nextState
             
-        case 'REMOVE_ONE_DAY_TO_DATE':
-            date = action.value
+        case 'REMOVE_DAY_TO_DATE':
+            date = action.payload
             date = new Date(date)
             date.setDate(date.getDate() - 1)
             date = getFormatedDate(date)

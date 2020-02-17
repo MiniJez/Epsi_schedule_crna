@@ -1,0 +1,1 @@
+export const getScheduleSelector = state => state.schedule.schedule;

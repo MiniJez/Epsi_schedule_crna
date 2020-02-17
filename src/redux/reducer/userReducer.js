@@ -3,15 +3,15 @@ const initialState = {
     lastName: ''
 }
 
-function user(state = initialState, action) {
+function userReducer(state = initialState, action) {
     let nextState
 
     switch (action.type) {
-        case 'SAVE_USER':
+        case 'SET_USER':
             nextState = {
                 ...state,
-                name: action.value.name,
-                lastName: action.value.lastName
+                name: action.payload.name,
+                lastName: action.payload.lastName
             }
 
             return nextState
@@ -21,4 +21,4 @@ function user(state = initialState, action) {
     }
 }
 
-export default user
+export default userReducer

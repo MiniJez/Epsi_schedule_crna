@@ -1,0 +1,2 @@
+export const ADD_DAY_TO_DATE = 'ADD_DAY_TO_DATE'
+export const REMOVE_DAY_TO_DATE = 'REMOVE_DAY_TO_DATE'
